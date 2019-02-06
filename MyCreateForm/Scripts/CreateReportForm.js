@@ -10,13 +10,44 @@ var demoBaseConfig = {
     mentions_fetch: mentionsFetchFunction,
     images_upload_url: '/ReportService.asmx/FileUploader',
     automatic_uploads: true,
-    images_upload_base_path: '/some/basepath',
-    images_upload_handler: function (blobInfo, success, failure) {
-        //setTimeout(function () {
-        //    success('http://moxiecode.cachefly.net/tinymce/v9/images/logo.png');
-        //}, 2000);
+    //images_upload_base_path: '/some/basepath',
+    //images_upload_handler: function (blobInfo, success, failure) {
+    //    //setTimeout(function () {
+    //    //    success('http://moxiecode.cachefly.net/tinymce/v9/images/logo.png');
+    //    //}, 2000);
+    //},
+    // language: 'ar',
+    file_picker_callback: function (callback, value, meta) {
+        if (meta.filetype === 'image') {
+            $('#upload').trigger('click');
+            $('#upload')
+                .on('change',
+                    function () {
+                        var file = this.files[0];
+                        if (file) {
+                            var data = new FormData();
+                            data.append('file', file);
+                            $.ajax({
+                                url: '/ReportService/upload',
+                                data: data,
+                                processData: false,
+                                contentType: false,
+                                async: false,
+                                type: 'POST'
+                            })
+                                .done(function (response) {
+                                    callback(response.location);
+                                })
+                                .fail(function (jqXhr, textStatus) {
+                                    console.log("Request failed: " + jqXhr.responseText + " --- " + textStatus);
+                                    alert("Request failed: " + jqXhr.responseText + " --- " + textStatus);
+                                });
+                        }
+                    });
+        }
     },
-   // language: 'ar',
+    file_picker_types: 'image',
+    image_title: true,
     theme_advanced_toolbar_align: "left",
     directionality: "rtl",
     theme_advanced_font_sizes: "8px,10px,12px,14px,16px,18px,20px,24px,32px,36px",

@@ -139,7 +139,7 @@
    <%-- <link href="plugins/TinyMCE/js/tinymce/skins/ui/oxide/skin.min.css" rel="stylesheet" />
     <script src="plugins/TinyMCE/js/tinymce/themes/silver/theme.js"></script>--%>
     <script src="plugins/TinyMCE/js/tinymce/tinymce.js"></script>
-
+    <%--<script src="Scripts/tinymce_extension.js"></script>--%>
 
 
     <script src="/Scripts/CreateReportForm.js"></script>

@@ -19,8 +19,27 @@ namespace MyCreateForm.Services
     {
 
         [WebMethod]
-        public string FileUploader(HttpPostedFileBase file)
+        public string upload(HttpPostedFileBase file)
         {
+            return "path";
+        }
+
+        [WebMethod]
+        public string FileUploader()
+        {
+            string base64String = "";
+            var httpPostedFile = HttpContext.Current.Request.Files["file"];
+            if (httpPostedFile != null)
+            {
+                // Validate the uploaded image(optional)
+
+                byte[] fileData = null;
+                using (var binaryReader = new BinaryReader(httpPostedFile.InputStream))
+                {
+                    fileData = binaryReader.ReadBytes(httpPostedFile.ContentLength);
+                    base64String = System.Convert.ToBase64String(fileData, 0, fileData.Length);
+                }
+            }
             return "path";
         }
         [WebMethod]
