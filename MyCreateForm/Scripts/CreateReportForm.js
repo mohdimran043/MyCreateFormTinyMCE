@@ -1,25 +1,177 @@
 ﻿
 var demoBaseConfig = {
-    selector: "textarea#compose-textarea",   
+    selector: "textarea#compose-textarea",
     height: 400,
     resize: true,
     autosave_ask_before_unload: false,
-    mentions_fetch: mentionsFetchFunction,
+    paste_data_images: true,
     powerpaste_allow_local_images: true,
+    paste_block_drop: true,
+    mentions_fetch: mentionsFetchFunction,
+    images_upload_url: '/ReportService.asmx/FileUploader',
+    automatic_uploads: true,
+    images_upload_base_path: '/some/basepath',
+    images_upload_handler: function (blobInfo, success, failure) {
+        //setTimeout(function () {
+        //    success('http://moxiecode.cachefly.net/tinymce/v9/images/logo.png');
+        //}, 2000);
+    },
+   // language: 'ar',
     theme_advanced_toolbar_align: "left",
     directionality: "rtl",
+    theme_advanced_font_sizes: "8px,10px,12px,14px,16px,18px,20px,24px,32px,36px",
+    theme_advanced_fonts: "Andale Mono=andale mono,times;" +
+        "Arial=arial,helvetica,sans-serif;" +
+        "Arial Black=arial black,avant garde;" +
+        "Book Antiqua=book antiqua,palatino;" +
+        "Comic Sans MS=comic sans ms,sans-serif;" +
+        "Courier New=courier new,courier;" +
+        "Century Gothic=century_gothic;" +
+        "Georgia=georgia,palatino;" +
+        "Gill Sans MT=gill_sans_mt;" +
+        "Gill Sans MT Bold=gill_sans_mt_bold;" +
+        "Gill Sans MT BoldItalic=gill_sans_mt_bold_italic;" +
+        "Gill Sans MT Italic=gill_sans_mt_italic;" +
+        "Helvetica=helvetica;" +
+        "Impact=impact,chicago;" +
+        "Iskola Pota=iskoola_pota;" +
+        "Iskola Pota Bold=iskoola_pota_bold;" +
+        "Symbol=symbol;" +
+        "Tahoma=tahoma,arial,helvetica,sans-serif;" +
+        "Terminal=terminal,monaco;" +
+        "Times New Roman=times new roman,times;" +
+        "Trebuchet MS=trebuchet ms,geneva;" +
+        "Verdana=verdana,geneva;" +
+        "Webdings=webdings;" +
+        "Wingdings=wingdings,zapf dingbats",
     plugins: [
         "advlist anchor autolink codesample colorpicker fullscreen help image imagetools",
         " lists link media noneditable paste preview",
         " searchreplace table template textcolor visualblocks wordcount"
-    ], 
+    ],
     toolbar:
-        "insertfile a11ycheck undo redo | bold italic | forecolor backcolor |   fontselect fontsizeselect  | alignleft aligncenter alignright alignjustify | bullist numlist |imageprint| ltr rtl | fullscreen",       
+        "insertfile a11ycheck undo redo | bold italic | forecolor backcolor |   fontselect fontsizeselect  | alignleft aligncenter alignright alignjustify | bullist numlist |imageprint| ltr rtl | fullscreen | image | mybutton",
     setup: function (ed) {
         ed.on('init', function (ed) {
             ed.target.editorCommands.execCommand("fontName", false, "Times New Roman");
-            ed.target.editorCommands.execCommand("fontsize", false, "12");
-        });
+            ed.target.editorCommands.execCommand("fontsize", false, "24");
+        }); automatic_uploads: true
+        //ed.ui.registry.addButton('mybutton', {
+        //    type:"Button",
+        //    text: "IMAGE",
+        //    icon: false,
+        //    onclick: function (e) {
+        //        console.log($(e.target));
+        //        if ($(e.target).prop("tagName") == 'BUTTON') {
+        //            console.log($(e.target).parent().parent().find('input').attr('id'));
+        //            if ($(e.target).parent().parent().find('input').attr('id') != 'tinymce-uploader') {
+        //                $(e.target).parent().parent().append('<input id="tinymce-uploader" type="file" name="pic" accept="image/*" style="display:none">');
+        //            }
+        //            $('#tinymce-uploader').trigger('click');
+        //            $('#tinymce-uploader').change(function () {
+        //                var input, file, fr, img;
+
+        //                if (typeof window.FileReader !== 'function') {
+        //                    write("The file API isn't supported on this browser yet.");
+        //                    return;
+        //                }
+
+        //                input = document.getElementById('tinymce-uploader');
+        //                if (!input) {
+        //                    write("Um, couldn't find the imgfile element.");
+        //                } else if (!input.files) {
+        //                    write("This browser doesn't seem to support the `files` property of file inputs.");
+        //                } else if (!input.files[0]) {
+        //                    write("Please select a file before clicking 'Load'");
+        //                } else {
+        //                    file = input.files[0];
+        //                    fr = new FileReader();
+        //                    fr.onload = createImage;
+        //                    fr.readAsDataURL(file);
+        //                }
+
+        //                function createImage() {
+        //                    img = new Image();
+        //                    img.src = fr.result;
+        //                    editor.insertContent('<img src="' + img.src + '"/>');
+        //                }
+        //            });
+
+        //        }
+
+        //        if ($(e.target).prop("tagName") == 'DIV') {
+        //            if ($(e.target).parent().find('input').attr('id') != 'tinymce-uploader') {
+        //                console.log($(e.target).parent().find('input').attr('id'));
+        //                $(e.target).parent().append('<input id="tinymce-uploader" type="file" name="pic" accept="image/*" style="display:none">');
+        //            }
+        //            $('#tinymce-uploader').trigger('click');
+        //            $('#tinymce-uploader').change(function () {
+        //                var input, file, fr, img;
+
+        //                if (typeof window.FileReader !== 'function') {
+        //                    write("The file API isn't supported on this browser yet.");
+        //                    return;
+        //                }
+
+        //                input = document.getElementById('tinymce-uploader');
+        //                if (!input) {
+        //                    write("Um, couldn't find the imgfile element.");
+        //                } else if (!input.files) {
+        //                    write("This browser doesn't seem to support the `files` property of file inputs.");
+        //                } else if (!input.files[0]) {
+        //                    write("Please select a file before clicking 'Load'");
+        //                } else {
+        //                    file = input.files[0];
+        //                    fr = new FileReader();
+        //                    fr.onload = createImage;
+        //                    fr.readAsDataURL(file);
+        //                }
+
+        //                function createImage() {
+        //                    img = new Image();
+        //                    img.src = fr.result;
+        //                    editor.insertContent('<img src="' + img.src + '"/>');
+        //                }
+        //            });
+        //        }
+
+        //        if ($(e.target).prop("tagName") == 'I') {
+        //            console.log($(e.target).parent().parent().parent().find('input').attr('id')); if ($(e.target).parent().parent().parent().find('input').attr('id') != 'tinymce-uploader') {
+        //                $(e.target).parent().parent().parent().append('<input id="tinymce-uploader" type="file" name="pic" accept="image/*" style="display:none">');
+        //            }
+        //            $('#tinymce-uploader').trigger('click');
+        //            $('#tinymce-uploader').change(function () {
+        //                var input, file, fr, img;
+
+        //                if (typeof window.FileReader !== 'function') {
+        //                    write("The file API isn't supported on this browser yet.");
+        //                    return;
+        //                }
+
+        //                input = document.getElementById('tinymce-uploader');
+        //                if (!input) {
+        //                    write("Um, couldn't find the imgfile element.");
+        //                } else if (!input.files) {
+        //                    write("This browser doesn't seem to support the `files` property of file inputs.");
+        //                } else if (!input.files[0]) {
+        //                    write("Please select a file before clicking 'Load'");
+        //                } else {
+        //                    file = input.files[0];
+        //                    fr = new FileReader();
+        //                    fr.onload = createImage;
+        //                    fr.readAsDataURL(file);
+        //                }
+
+        //                function createImage() {
+        //                    img = new Image();
+        //                    img.src = fr.result;
+        //                    editor.insertContent('<img src="' + img.src + '"/>');
+        //                }
+        //            });
+        //        }
+
+        //    }
+        //});
     }
 };
 

@@ -16,7 +16,38 @@ namespace MyCreateForm
         {
 
         }
+        //protected void Page_Load(object sender, EventArgs e)
+        //{
+        //    ExportOptions objExOpt;
 
+        //    CrystalReportViewer1.ReportSource = (object)getReportDocument();
+        //    CrystalReportViewer1.DataBind();
+        //    // Get the report document
+        //    ReportDocument repDoc = getReportDocument();
+
+        //    repDoc.ExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+        //    repDoc.ExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+        //    DiskFileDestinationOptions objDiskOpt = new DiskFileDestinationOptions();
+        //    objDiskOpt.DiskFileName = @"c:\crystal report\TFA.pdf";
+        //    repDoc.ExportOptions.DestinationOptions = objDiskOpt;
+        //    repDoc.Export();
+        //}
+
+        //private ReportDocument getReportDocument()
+        //{
+        //    // File Path for Crystal Report
+        //    string repFilePath = Server.MapPath("~/CrystalReport1.rpt");
+        //    // Declare a new Crystal Report Document object
+        //    // and the report file into the report document
+        //    ReportDocument repDoc = new ReportDocument();
+
+        //    repDoc.Load(repFilePath);
+
+        //    // Set the datasource by getting the dataset from business
+        //    // layer and
+        //    // In our case business layer is getCustomerData function
+        //    return repDoc;
+        //}
         protected void btnClick_Click(object sender, EventArgs e)
         {
             DownloadAsPDF();
@@ -49,6 +80,8 @@ namespace MyCreateForm
                 Response.Write(ex.Message);
             }
         }
+
+
 
         //public void CreatePDFFromHTMLFile(string HtmlStream, string FileName)
         //{
